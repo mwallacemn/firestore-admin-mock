@@ -285,6 +285,8 @@ function serializeArray(array) {
   return serialized_array;
 }
 
+const MAX_COMPLEXITY = 30;
+
 const operators = {
   "==": function(field, value) {
     if (field && field.constructor.name === "TimestampMock") {
@@ -378,7 +380,7 @@ const operators = {
       throw new Error("The 'in' filter operator requires an array of values");
     }
 
-    if (values.length > 10) {
+    if (values.length > MAX_COMPLEXITY) {
       throw new Error(
         "Firestore only allows up to 10 values to be filtered in an 'in' filter"
       );
@@ -402,7 +404,7 @@ const operators = {
       throw new Error("The 'not-in' filter operator requires an array of values");
     }
 
-    if (values.length > 10) {
+    if (values.length > MAX_COMPLEXITY) {
       throw new Error(
         "Firestore only allows up to 10 values to be filtered in a 'not-in' filter"
       );
@@ -428,7 +430,7 @@ const operators = {
       );
     }
 
-    if (values.length > 10) {
+    if (values.length > MAX_COMPLEXITY) {
       throw new Error(
         "Firestore only allows up to 10 values to be filtered in an 'array-contains-any' filter"
       );
