@@ -532,12 +532,12 @@ describe("Testing the firestore _where method with the in filter", () => {
     });
   });
 
-  it("Errors when more than 10 queries are provided", () => {
+  it("Errors when more than 30 queries are provided", () => {
     function error() {
       return firestore._where(
         "date",
         "in",
-        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        Array.from(Array(31).keys()),
         undefined,
         "Coll1"
       );
@@ -609,7 +609,7 @@ describe("Testing the 'array-contains-any' filter", () => {
       return firestore._where(
         "date",
         "array-contains-any",
-        [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        Array.from(Array(31).keys()),
         undefined,
         "Coll1"
       );
